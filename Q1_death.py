@@ -19,8 +19,12 @@ death_state = final_death.groupby(['state']).sum()
 death_month = final_death.groupby(pd.Grouper(key='date', axis=0, freq='M')).sum()
 maxMonth = str(death_month['deaths_new'].idxmax())
 
-selectGroupBy = st.selectbox("View By", ['Day','Month'])
-selectState = st.selectbox("Select a state to view", ['All','Johor','Kedah','Kelantan','Melaka','Negeri Sembilan','Pahang','Pulau Pinang','Perak','Perlis','Selangor','Terengganu','Sabah','Sarawak','W.P. Kuala Lumpur','W.P. Labuan','W.P. Putrajaya'])
+left_column, right_column = st.columns(2)
+with left_column:
+    selectGroupBy = st.selectbox("View By", ['Day','Month'])
+
+with right_column:
+    selectState = st.selectbox("Select a state to view", ['All','Johor','Kedah','Kelantan','Melaka','Negeri Sembilan','Pahang','Pulau Pinang','Perak','Perlis','Selangor','Terengganu','Sabah','Sarawak','W.P. Kuala Lumpur','W.P. Labuan','W.P. Putrajaya'])
 
 if selectGroupBy == 'Day':
     if selectState == 'All':
@@ -34,7 +38,14 @@ if selectGroupBy == 'Day':
             title='Total Death of Each State by Day'
         )
 
+        id = final_death['deaths_new'].idxmax()
+        day = final_death.loc[id].date
+        state = final_death.loc[id].state
         st.altair_chart(chart)
+        st.markdown("The total death of Malaysia is " + str(death_state['deaths_new'].sum()))
+        st.markdown("The mean death of Malaysia is " + str(death_state['deaths_new'].mean()))
+        st.markdown("The state with the most death is " + str(death_state['deaths_new'].idxmax()) + ' at ' + str(death_state['deaths_new'].max()))
+        st.markdown("The day with the most death is " + str(day) + ' in ' + state +' at ' + str(final_death['deaths_new'].max()))
     else:
         state_total = final_death[final_death['state'] == selectState]
         state_chart = alt.Chart(state_total).mark_line().encode(
@@ -46,8 +57,13 @@ if selectGroupBy == 'Day':
             height=800,
             title='Total Death of ' + selectState + ' by Day'
         )
+        day = state_total['deaths_new'].idxmax()
+        day = state_total.loc[day].date
 
         st.altair_chart(state_chart)
+        st.markdown("The total death of " + selectState + ' is ' + str(state_total['deaths_new'].sum()))        
+        st.markdown("The mean death of " + selectState + ' is ' + str(state_total['deaths_new'].mean()))     
+        st.markdown("The day with the most death is " + str(day) + ' at ' + str(state_total['deaths_new'].max()))
 else:
     if selectState == 'All':
         group_death = group_death.reset_index()
@@ -62,6 +78,10 @@ else:
         )
 
         st.altair_chart(monthChart)
+        st.markdown("The total death of Malaysia is " + str(death_state['deaths_new'].sum()))
+        st.markdown("The mean death of Malaysia is " + str(death_state['deaths_new'].mean()))
+        st.markdown("The state with the most death is " + str(death_state['deaths_new'].idxmax()) + ' at ' + str(death_state['deaths_new'].max()))
+        st.markdown("The month with the most death is " + month[maxMonth] + ' at ' + str(death_month['deaths_new'].max()))
     else:
         group_death = group_death.reset_index()
         state_month_total = group_death[group_death['state'] == selectState]
@@ -76,7 +96,6 @@ else:
         )
 
         st.altair_chart(stateMonthChart)
-
-st.markdown("The mean death of Malaysia is " + str(death_state['deaths_new'].mean()))
-st.markdown("The state with the most death is " + str(death_state['deaths_new'].idxmax()) + ' at ' + str(death_state['deaths_new'].max()))
-st.markdown("The month with the most death is " + month[maxMonth] + ' at ' + str(death_month['deaths_new'].max()))
+        st.markdown("The total death of " + selectState + ' is ' + str(state_month_total['deaths_new'].sum()))        
+        st.markdown("The mean death of " + selectState + ' is ' + str(state_month_total['deaths_new'].mean()))     
+        st.markdown("The month with the most death is " + month[maxMonth] + ' at ' + str(state_month_total['deaths_new'].max()))

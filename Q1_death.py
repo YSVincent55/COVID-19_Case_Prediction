@@ -4,7 +4,6 @@ import pandas as pd
 import altair as alt 
 
 raw_death = pd.read_csv('https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/deaths_state.csv')
-pop = pd.read_csv( "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/static/population.csv")
 
 month = {'2020-03-31 00:00:00':'March', '2020-04-30 00:00:00':'April','2020-05-31 00:00:00':'May','2020-06-30 00:00:00':'June','2020-07-31 00:00:00':'July','2020-08-31 00:00:00':'August','2020-09-30 00:00:00':'September','2020-10-31 00:00:00':'October','2020-11-30 00:00:00':'November','2020-12-31 00:00:00':'December',
          '2021-01-31 00:00:00':'January','2021-02-28 00:00:00':'February','2021-03-31 00:00:00':'March','2021-04-30 00:00:00':'April','2021-05-31 00:00:00':'May','2021-06-30 00:00:00':'June','2021-07-31 00:00:00':'July','2021-08-31 00:00:00':'August','2021-09-30 00:00:00':'September',}
@@ -31,7 +30,8 @@ if selectGroupBy == 'Day':
             alt.Color('state', type='nominal')
         ).properties(
             width=1200,
-            height=800
+            height=800,
+            title='Total Death of Each State by Day'
         )
 
         st.altair_chart(chart)
@@ -43,7 +43,8 @@ if selectGroupBy == 'Day':
             alt.Color('state', type='nominal')
         ).properties(
             width=1200,
-            height=800
+            height=800,
+            title='Total Death of ' + selectState + ' by Day'
         )
 
         st.altair_chart(state_chart)
@@ -56,7 +57,8 @@ else:
             alt.Color('state', type='nominal')
         ).properties(
             width=1200,
-            height=800
+            height=800,
+            title='Total Death of Each State by Month'
         )
 
         st.altair_chart(monthChart)
@@ -69,7 +71,8 @@ else:
             alt.Color('state', type='nominal')
         ).properties(
             width=1200,
-            height=800
+            height=800,
+            title='Total Death of ' + selectState + ' by Month'            
         )
 
         st.altair_chart(stateMonthChart)

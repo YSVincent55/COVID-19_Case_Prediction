@@ -1,9 +1,10 @@
-def Q1_death():   
-    import streamlit as st 
-    import numpy as np
-    import pandas as pd
-    import altair as alt 
+ 
+import streamlit as st 
+import numpy as np
+import pandas as pd
+import altair as alt 
 
+def q1_death():  
     raw_death = pd.read_csv('https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/deaths_state.csv')
 
     month = {'2020-03-31 00:00:00':'March', '2020-04-30 00:00:00':'April','2020-05-31 00:00:00':'May','2020-06-30 00:00:00':'June','2020-07-31 00:00:00':'July','2020-08-31 00:00:00':'August','2020-09-30 00:00:00':'September','2020-10-31 00:00:00':'October','2020-11-30 00:00:00':'November','2020-12-31 00:00:00':'December',

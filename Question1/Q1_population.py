@@ -1,8 +1,9 @@
+import streamlit as st 
+import numpy as np
+import pandas as pd
+import altair as alt 
+
 def q1_population():
-    import streamlit as st 
-    import numpy as np
-    import pandas as pd
-    import altair as alt 
 
     pop = pd.read_csv( "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/static/population.csv")
     pop = pop.drop(0)

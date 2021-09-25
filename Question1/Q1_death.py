@@ -68,6 +68,7 @@ def q1_death():
                     )
 
             st.altair_chart(boxplot2)
+        st.markdown('From the boxplots, above, we can see that deaths_new, deaths_new_dod, deaths_bid and deaths_bid_dod contain many outliers. This is due to the fact that at the early stage of COVID-19 has very less death occurs. The death surge after several waves of COVID-19 attacked Malaysia. We decided to not remove the outliers as they are very crucial to the assignment and training model.')
     else:
         left_column2, right_column2 = st.columns(2)
         with left_column2:
@@ -96,6 +97,7 @@ def q1_death():
                 st.markdown("The mean death of Malaysia is " + str(death_state['deaths_new'].mean()))
                 st.markdown("The state with the most death is " + str(death_state['deaths_new'].idxmax()) + ' at ' + str(death_state['deaths_new'].max()))
                 st.markdown("The day with the most death is " + str(day) + ' in ' + state +' at ' + str(final_death['deaths_new'].max()))
+                st.markdown("The graph above shows the total death of every state in Malaysia every day. We can see that Selangor has the highest amount of total death among other states. We also noticed that the total death surged for every state after May 2021. This may be due to the delta virus that attacks Malaysia around this period.")
             else:
                 state_total = final_death[final_death['state'] == selectState]
                 state_chart = alt.Chart(state_total).mark_line().encode(
@@ -114,6 +116,7 @@ def q1_death():
                 st.markdown("The total death of " + selectState + ' is ' + str(state_total['deaths_new'].sum()))        
                 st.markdown("The mean death of " + selectState + ' is ' + str(state_total['deaths_new'].mean()))     
                 st.markdown("The day with the most death is " + str(day) + ' at ' + str(state_total['deaths_new'].max()))
+                st.markdown("The graph above shows the total death of every state in Malaysia every day. We can see that Selangor has the highest amount of total death among other states. We also noticed that the total death surged for every state after May 2021. This may be due to the delta virus that attacks Malaysia around this period.")
         else:
             if selectState == 'All':
                 group_death = group_death.reset_index()
@@ -132,6 +135,7 @@ def q1_death():
                 st.markdown("The mean death of Malaysia is " + str(death_state['deaths_new'].mean()))
                 st.markdown("The state with the most death is " + str(death_state['deaths_new'].idxmax()) + ' at ' + str(death_state['deaths_new'].max()))
                 st.markdown("The month with the most death is " + month[maxMonth] + ' at ' + str(death_month['deaths_new'].max()))
+                st.markdown("The graph above shows the total death of every state in Malaysia for every month. We can see that Selangor topped the graph with a huge difference compared to other states. The pattern of the graph generally follows the pattern of total death grouped by day.")
             else:
                 group_death = group_death.reset_index()
                 state_month_total = group_death[group_death['state'] == selectState]
@@ -149,3 +153,4 @@ def q1_death():
                 st.markdown("The total death of " + selectState + ' is ' + str(state_month_total['deaths_new'].sum()))        
                 st.markdown("The mean death of " + selectState + ' is ' + str(state_month_total['deaths_new'].mean()))     
                 st.markdown("The month with the most death is " + month[maxMonth] + ' at ' + str(state_month_total['deaths_new'].max()))
+                st.markdown("The graph above shows the total death of every state in Malaysia for every month. We can see that Selangor topped the graph with a huge difference compared to other states. The pattern of the graph generally follows the pattern of total death grouped by day.")

@@ -56,7 +56,7 @@ def q1_test():
                     )
 
             st.altair_chart(boxplot2)
-
+        st.markdown('From the boxplots above, we can see that there are quite a lot of outliers in both rtk-ag and pcr. This is because the distribution of the number of tests done in each state is not normal. Some states with more populations will conduct more tests while states with less population like Perlis conduct only a few tests in each month. Therefore, some states with extremely less tests and more tests will be treated as outliers. However, we did not remove these outliers as the nation level data are not used in this assignment and training model.')
     else:
         left_column2, right_column2 = st.columns(2)
         with left_column2:
@@ -85,6 +85,7 @@ def q1_test():
                 st.markdown("The mean tests of Malaysia is " + str(tests_state['total_tests'].mean()))
                 st.markdown("The state with the most tests is " + str(tests_state['total_tests'].idxmax()) + ' at ' + str(tests_state['total_tests'].max()))
                 st.markdown("The day with the most tests is " + str(day) + ' in ' + state +' at ' + str(final_tests['total_tests'].max()))
+                st.markdown("From the graph above, we can see that Selangor has conducted more tests compared to other states. This is because the number of new cases in Selangor is high and the number of medical centres in Selangor is higher than other states.")
             else:
                 state_total = final_tests[final_tests['state'] == selectState]
                 state_chart = alt.Chart(state_total).mark_line().encode(
@@ -103,6 +104,7 @@ def q1_test():
                 st.markdown("The total tests of " + selectState + ' is ' + str(state_total['total_tests'].sum()))        
                 st.markdown("The mean tests of " + selectState + ' is ' + str(state_total['total_tests'].mean()))     
                 st.markdown("The day with the most tests is " + str(day) + ' at ' + str(state_total['total_tests'].max()))
+                st.markdown("From the graph above, we can see that Selangor has conducted more tests compared to other states. This is because the number of new cases in Selangor is high and the number of medical centres in Selangor is higher than other states.")
         else:
             if selectState == 'All':
                 group_tests = group_tests.reset_index()
@@ -121,6 +123,7 @@ def q1_test():
                 st.markdown("The mean tests of Malaysia is " + str(tests_state['total_tests'].mean()))
                 st.markdown("The state with the most tests is " + str(tests_state['total_tests'].idxmax()) + ' at ' + str(tests_state['total_tests'].max()))
                 st.markdown("The month with the most tests is " + month[maxMonth] + ' at ' + str(tests_month['total_tests'].max()))
+                st.markdown("From the graph above, we can see that Selangor has conducted more tests compared to other states. This is because the number of new cases in Selangor is high and the number of medical centres in Selangor is higher than other states.")
             else:
                 group_tests = group_tests.reset_index()
                 state_month_total = group_tests[group_tests['state'] == selectState]
@@ -138,3 +141,4 @@ def q1_test():
                 st.markdown("The total tests of " + selectState + ' is ' + str(state_month_total['total_tests'].sum()))        
                 st.markdown("The mean tests of " + selectState + ' is ' + str(state_month_total['total_tests'].mean()))     
                 st.markdown("The month with the most tests is " + month[maxMonth] + ' at ' + str(state_month_total['total_tests'].max()))
+                st.markdown("From the graph above, we can see that Selangor has conducted more tests compared to other states. This is because the number of new cases in Selangor is high and the number of medical centres in Selangor is higher than other states.")

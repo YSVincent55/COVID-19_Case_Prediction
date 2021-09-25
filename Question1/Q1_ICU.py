@@ -181,6 +181,7 @@ def q1_icu():
                     )
 
             st.altair_chart(boxplot14)
+        st.markdown('Based on the boxplots above, we can see that every column in the icu.csv dataset contains a lot of outliers. All of the boxplots showed that the data is positively skewed. This may be due to the slow start of the COVID-19 pandemic which contains a low number of COVID-19 cases, followed by a sudden increase of high number COVID-19 cases that caused a high number of patients admitted to the ICU. However, we decided to not remove these outliers as the data are crucial to this assignment and training model.')
         
     else:
         left_column2, right_column2 = st.columns(2)
@@ -229,6 +230,8 @@ def q1_icu():
                 st.markdown("The mean critical care beds dedicated for COVID-19 of Malaysia is " + str(state_icu['beds_icu_covid'].mean()))
                 st.markdown("The state with the most critical care beds dedicated for COVID-19 is " + str(state_icu['beds_icu_covid'].idxmax()) + ' at ' + str(state_icu['beds_icu_covid'].max()))
                 st.markdown("The day with the most critical care beds dedicated for COVID-19 is " + str(day_dAll) + ' in ' + state_dAll +' at ' + str(icu['beds_icu_covid'].max()))
+                st.markdown('Based on the line graphs above,  the graph on the top showed that Selangor recorded the highest number of COVID-19 patients under iIntensive care for every month while the graph on the bottom showed that Selangor recorded the highest total number of critical care beds dedicated for COVID-19 in the ICU. The total number of COVID-19 patients under intensive care for every month was low at the early stages but the total number of COVID-19 patients rocketed rapidly starting from May 2021 to around September 2021,especially Selangor.')
+                st.markdown('One of the important insights that can be obtained from this chart is that the total critical care beds in the icu are still sufficient for the COVID-19 patients, even though the number of COVID-19 cases are getting higher as the total number of critical care beds dedicated for COVID-19 is always higher than the total number of patients for every month. ')         
             else:
                 state_day_total1 = icu[icu['state'] == selectState]
                 state_day_chart1 = alt.Chart(state_day_total1).mark_line().encode(
@@ -265,7 +268,8 @@ def q1_icu():
                 st.markdown("The total critical care beds dedicated for COVID-19 in " + selectState + ' is ' + str(state_day_total2['beds_icu_covid'].sum()))        
                 st.markdown("The mean number of critical care beds dedicated for COVID-19 for " + selectState + ' is ' + str(state_day_total2['beds_icu_covid'].mean()))     
                 st.markdown("The day with the most critical care beds dedicated for COVID-19 is " + str(day_dc_all) + ' at ' + str(state_day_total2['beds_icu_covid'].max()))
-
+                st.markdown('Based on the line graphs above,  the graph on the top showed that Selangor recorded the highest number of COVID-19 patients under iIntensive care for every month while the graph on the bottom showed that Selangor recorded the highest total number of critical care beds dedicated for COVID-19 in the ICU. The total number of COVID-19 patients under intensive care for every month was low at the early stages but the total number of COVID-19 patients rocketed rapidly starting from May 2021 to around September 2021,especially Selangor.')
+                st.markdown('One of the important insights that can be obtained from this chart is that the total critical care beds in the icu are still sufficient for the COVID-19 patients, even though the number of COVID-19 cases are getting higher as the total number of critical care beds dedicated for COVID-19 is always higher than the total number of patients for every month. ')         
         else:
             if selectState == 'All':
                 month_icu = month_icu.reset_index()
@@ -300,6 +304,8 @@ def q1_icu():
                 st.markdown("The mean number of total critical care beds dedicated for COVID-19 for every Monthof Malaysia is " + str(state_icu['beds_icu_covid'].mean()))
                 st.markdown("The state with the most number of critical care beds dedicated for COVID-19 is " + str(state_icu['beds_icu_covid'].idxmax()) + ' at ' + str(state_icu['beds_icu_covid'].max()))
                 st.markdown("The month with the most number of critical care beds dedicated for COVID-19(from 2020-2021) is " +  month[maxMonth2] + ' at ' + str(m_icu['beds_icu_covid'].max()))
+                st.markdown('Based on the line graphs above,  the graph on the top showed that Selangor recorded the highest number of COVID-19 patients under iIntensive care for every month while the graph on the bottom showed that Selangor recorded the highest total number of critical care beds dedicated for COVID-19 in the ICU. The total number of COVID-19 patients under intensive care for every month was low at the early stages but the total number of COVID-19 patients rocketed rapidly starting from May 2021 to around September 2021,especially Selangor.')
+                st.markdown('One of the important insights that can be obtained from this chart is that the total critical care beds in the icu are still sufficient for the COVID-19 patients, even though the number of COVID-19 cases are getting higher as the total number of critical care beds dedicated for COVID-19 is always higher than the total number of patients for every month. ')         
             else:
                 month_icu = month_icu.reset_index()
                 state_month_total1 = month_icu[month_icu['state'] == selectState]
@@ -331,3 +337,5 @@ def q1_icu():
                 st.markdown("The total critical care beds dedicated for COVID-19 for " + selectState + ' is ' + str(state_month_total2['beds_icu_covid'].sum()))        
                 st.markdown("The mean number of critical care beds dedicated for COVID-19 for " + selectState + ' is ' + str(state_month_total2['beds_icu_covid'].mean()))     
                 st.markdown("The highest number of critical care beds dedicated for COVID-19 for " + selectState + ' is ' + str(state_month_total2['beds_icu_covid'].max()))
+                st.markdown('Based on the line graphs above,  the graph on the top showed that Selangor recorded the highest number of COVID-19 patients under iIntensive care for every month while the graph on the bottom showed that Selangor recorded the highest total number of critical care beds dedicated for COVID-19 in the ICU. The total number of COVID-19 patients under intensive care for every month was low at the early stages but the total number of COVID-19 patients rocketed rapidly starting from May 2021 to around September 2021,especially Selangor.')
+                st.markdown('One of the important insights that can be obtained from this chart is that the total critical care beds in the icu are still sufficient for the COVID-19 patients, even though the number of COVID-19 cases are getting higher as the total number of critical care beds dedicated for COVID-19 is always higher than the total number of patients for every month. ')         

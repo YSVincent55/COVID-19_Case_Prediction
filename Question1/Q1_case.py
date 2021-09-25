@@ -56,6 +56,7 @@ def q1_case():
                     )
 
             st.altair_chart(boxplot2)
+        st.markdown('From the boxplots above, we can observe that there are a lot of outliers in cases_new and cases_recovered while there are fewer outliers in cases_import. It is similar to the reason mentioned in the boxplots of the nation level dataset. However, we decided to not remove these outliers as the data are crucial to this assignment and training model.')    
 
     else:
         left_column2, right_column2 = st.columns(2)
@@ -85,6 +86,7 @@ def q1_case():
                 st.markdown("The mean cases of Malaysia is " + str(cases_state['cases_new'].mean()))
                 st.markdown("The state with the most cases is " + str(cases_state['cases_new'].idxmax()) + ' at ' + str(cases_state['cases_new'].max()))
                 st.markdown("The day with the most cases is " + str(day) + ' in ' + state +' at ' + str(final_cases['cases_new'].max()))
+                st.markdown('From the graph above, it is obvious to see that Selangor has the highest number of cases since December 2020. This might be related to the population as Selangor has the highest population in Malaysia. Before the outbreak in Selangor, the number of cases in Sabah was the highest.')
             else:
                 state_total = final_cases[final_cases['state'] == selectState]
                 state_chart = alt.Chart(state_total).mark_line().encode(
@@ -103,6 +105,7 @@ def q1_case():
                 st.markdown("The total cases of " + selectState + ' is ' + str(state_total['cases_new'].sum()))        
                 st.markdown("The mean cases of " + selectState + ' is ' + str(state_total['cases_new'].mean()))     
                 st.markdown("The day with the most cases is " + str(day) + ' at ' + str(state_total['cases_new'].max()))
+                st.markdown('From the graph above, it is obvious to see that Selangor has the highest number of cases since December 2020. This might be related to the population as Selangor has the highest population in Malaysia. Before the outbreak in Selangor, the number of cases in Sabah was the highest.')
         else:
             if selectState == 'All':
                 group_cases = group_cases.reset_index()
@@ -121,6 +124,7 @@ def q1_case():
                 st.markdown("The mean cases of Malaysia is " + str(cases_state['cases_new'].mean()))
                 st.markdown("The state with the most cases is " + str(cases_state['cases_new'].idxmax()) + ' at ' + str(cases_state['cases_new'].max()))
                 st.markdown("The month with the most cases is " + month[maxMonth] + ' at ' + str(cases_month['cases_new'].max()))
+                st.markdown('From the graph above, it is obvious to see that Selangor has the highest number of cases since December 2020. This might be related to the population as Selangor has the highest population in Malaysia. Before the outbreak in Selangor, the number of cases in Sabah was the highest.')
             else:
                 group_cases = group_cases.reset_index()
                 state_month_total = group_cases[group_cases['state'] == selectState]
@@ -138,3 +142,4 @@ def q1_case():
                 st.markdown("The total cases of " + selectState + ' is ' + str(state_month_total['cases_new'].sum()))        
                 st.markdown("The mean cases of " + selectState + ' is ' + str(state_month_total['cases_new'].mean()))     
                 st.markdown("The month with the most cases is " + month[maxMonth] + ' at ' + str(state_month_total['cases_new'].max()))
+                st.markdown('From the graph above, it is obvious to see that Selangor has the highest number of cases since December 2020. This might be related to the population as Selangor has the highest population in Malaysia. Before the outbreak in Selangor, the number of cases in Sabah was the highest.')

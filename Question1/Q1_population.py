@@ -18,6 +18,7 @@ def q1_population():
             )
 
     st.altair_chart(popChart)
+    st.markdown('The graph shows the total population of every state in Malaysia. Selangor comes into first place due to it being the main economic center in Malaysia. Johor and Sabah are very similar in terms of the total population. W.P. Labuan and W.P. Putrajaya has the least total population. This is mainly restricted by its land size and proximity to another large state.\n')
 
     pop18Chart = alt.Chart(pop).mark_bar().encode(
         alt.X('state', type='nominal'),
@@ -28,7 +29,8 @@ def q1_population():
                 title='Total Population Above 18 Years Old of Each State'
             )
 
-    st.altair_chart(popChart)
+    st.altair_chart(pop18Chart)
+    st.markdown('The graph shows the total population of people aged 18 years old and above in Malaysia. We can see that the pattern generally follows the pattern of the total population of every state in Malaysia')
 
     pop60Chart = alt.Chart(pop).mark_bar().encode(
         alt.X('state', type='nominal'),
@@ -40,3 +42,4 @@ def q1_population():
             )
 
     st.altair_chart(pop60Chart)
+    st.markdown('The graph shows the total population of people aged 60 years old and above in Malaysia. We can see that the pattern generally follows the pattern of the total population of every state in Malaysia except Sabah and Sarawak. Sarawak has more senior citizens but its total population is lesser than Sabah. Similarly, Sabah has fewer senior citizens but the total population is more than Sarawak.\n')

@@ -188,7 +188,7 @@ def model_pahang():
     roc_chart =chart_all + chart_p.properties(title='ROC curve',width=800,height=600,)
     st.altair_chart(roc_chart)
 
-    fig2, ax2 = plt.subplots()
+    fig4, ax4 = plt.subplots()
     prec_lgbm, rec_lgbm, threshold_lgbm = precision_recall_curve(y_pahang_test, pred_prob1,pos_label=1)
     prec_rfc, rec_rfc, threshold_rfc = precision_recall_curve(y_pahang_test, pred_prob2,pos_label=1)
     plt.plot(rec_lgbm,prec_lgbm, color='orange', label='LGBM Classifier') 
@@ -199,4 +199,4 @@ def model_pahang():
     plt.ylabel('Precision')
     plt.title('Precision-Recall Curve')
     plt.legend()
-    st.pyplot(fig2)
+    st.pyplot(fig4)

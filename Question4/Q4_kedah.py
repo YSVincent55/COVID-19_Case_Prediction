@@ -12,7 +12,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, plot_confu
 from sklearn.metrics import mean_squared_error as mse, mean_absolute_error, roc_curve, accuracy_score, classification_report, roc_auc_score, precision_recall_curve
 import plotly.graph_objects as go
 
-def q4_kedah():
+def model_kedah():
     final_merged = pd.read_csv('Dataset/final_merged.csv')
     strong_feat = ['pcr', 'positivity_rate', 'cases_recovered', 'hosp_pui',
        'pkrc_admitted_total', 'vent_noncovid', 'rtk-ag',

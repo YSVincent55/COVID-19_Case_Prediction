@@ -32,7 +32,7 @@ def q4_selangor():
         'pkrc_admitted_covid', 'total_tests', 'pkrc_discharged_covid',
         'hosp_admitted_total', 'beds_covid', 'hosp_discharged_pui']
 
-    final_merged = pd.read_csv('final_merged.csv')
+    final_merged = pd.read_csv('Dataset/final_merged.csv')
     df_selangor = final_merged[final_merged['state'] == 'Selangor']
     X_selangor  = df_selangor[strong_feat]
     y_selangor  = df_selangor['cases_new']

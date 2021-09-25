@@ -162,6 +162,7 @@ def model_pahang():
     plt.title('ROC curve')
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive rate')
+    plt.legend()
     st.pyplot(fig3)
 
     fig4, ax4 = plt.subplots()

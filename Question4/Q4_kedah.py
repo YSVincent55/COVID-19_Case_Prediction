@@ -135,6 +135,7 @@ def model_kedah():
     plt.title('ROC curve')
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive rate')
+    plt.legend()
     st.pyplot(fig3)
 
     # Precision Recall Curve

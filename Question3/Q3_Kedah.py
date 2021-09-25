@@ -27,7 +27,7 @@ def q3_kedah():
     featureCoef['Value'] = coef
 
     st.markdown('### Using LASSO')
-    table = go.Figure(data=graph.Table(
+    table = go.Figure(data=go.Table(
         header=dict(values=list(featureCoef.columns),
                     fill_color='lightcyan',height=30), 
         cells=dict(values=[featureCoef.Columns, featureCoef.Value],

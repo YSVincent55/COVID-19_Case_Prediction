@@ -31,7 +31,8 @@ def model_kedah():
     X_kedah_train, X_kedah_test, y_kedah_train, y_kedah_test = train_test_split(X_kedah_norm, y_kedah, test_size=0.3, random_state=2)
 
 
-    st.header('Regression Model')
+    st.markdown('# Kedah')
+    st.markdown('## Regression')
 
     left_column1, right_column1 = st.columns(2)
     with left_column1:
@@ -62,7 +63,7 @@ def model_kedah():
         lr_rmse = mse(y_kedah_test, y_kedah_predlr, squared=False)
         lr_r2 = lr.score(X_kedah_test,y_kedah_test)
         lr_mae = mean_absolute_error(y_kedah_test, y_kedah_predlr)
-        st.markdown('** Linear Regressor Score **')
+        st.markdown('** Linear Regression Score **')
         table2 = go.Figure(data=[go.Table(
         columnwidth=[1, 4],
         header=dict(values=['Metrics', 'Value'],
@@ -76,12 +77,14 @@ def model_kedah():
         table2 = table2.update_layout(width=400,height=200, margin=dict(l=0,r=10,t=5,b=0))
         st.write(table2)
 
+    st.markdown('For regression, we choose CatBoostRegressor and Linear Regression to predict the daily case. After running these two regressors, we obtained the results and compared them side by side. We use mean squared error (MSE) and root mean squared errors (RMSE) as the indicator. The MSE and RMSE of linear regression are lower than the MSE and RMSE of the CatBoostRegressor at 7335.67, 85.64, 7483.84 and 86.50 respectively. Hence, linear regression is performing better in predicting the daily cases for Johor. Besides, we have also used Mean Absolute Error(MAE) as one of the evaluation metrics for Linear Regression and CatBoostRegressor which is at 91.49 and 128.45 respectively. MAE is a good way to evaluate the model as it calculates the absolute difference between actual and predicted values. A lower MAE is always better so Linear Regression performs better than CatBoostRegressor.')
 
     y_kedah_bin =pd.cut(y_kedah,3,labels=['Low','Medium','High'])
     X_kedah_train, X_kedah_test, y_kedah_train, y_kedah_test = train_test_split(X_kedah_norm, y_kedah_bin, test_size=0.3, random_state=2)
 
 
     st.markdown('## Classification')
+    st.markdown('We use LGBM and Random Forest Classifier to predict the daily cases and compare their performance. ')
     st.markdown('** LGBM Classifier **')
 
     # Confusion Matrix
@@ -96,6 +99,8 @@ def model_kedah():
     lgbm_display.plot(cmap = 'Greens',xticks_rotation ='vertical',ax=ax1)
     st.pyplot(fig1)
     
+    st.markdown('The first graph above shows the confusion matrix for the LGBM Classifier. This classifier has high accuracy for “low” and “medium” labels but has low accuracy for “high” labels.')
+
     rfc = pickle.load(open('Model/rfc_kedah', 'rb'))
     y_pred_rfc = rfc.predict(X_kedah_test)
     
@@ -109,6 +114,7 @@ def model_kedah():
     rfc_display.plot(cmap = 'Greens',xticks_rotation ='vertical',ax=ax2)
     st.pyplot(fig2)
 
+    st.markdown('The second graph above shows the confusion matrix for the Random Forest Classifier. This classifier has high accuracy for “low” and “medium” labels but has low accuracy for “high” labels. This classifier has a similar accuracy with the LGBM classifier but the f1-score of this classifier is better than LGBM Classifier in overall. ')
     # ROC
 
     encoder = LabelEncoder()
@@ -120,7 +126,7 @@ def model_kedah():
     random_probs = [0 for i in range(len(y_kedah_test))]
     p_fpr, p_tpr, _ = roc_curve(y_kedah_test, random_probs, pos_label=1)
     
-    st.markdown('## Perfomance Comparasion')
+    st.markdown('## Perfomance Comparison')
     fig3,ax3 = plt.subplots()
     plt.style.use('seaborn')
     plt.plot(fpr1, tpr1, linestyle='--',color='orange', label='LGBM Classifier')
@@ -144,3 +150,6 @@ def model_kedah():
     plt.title('Precision-Recall Curve')
     plt.legend()
     st.pyplot(fig4)
+
+    st.markdown('The ROC curve and Precision-Recall Curve also shows that the Random Forest classifier is better than LGBM Classifier. This is due to the fact that the line for Random Forest classifier is closer to the ideal line for ROC curve and Precision-Recall Curve. Therefore, the Random Forest classifier is the better performing model in predicting daily cases for Kedah.')
+    st.markdown('If we can choose only one type of supervised learning technique, we will prefer a regression model in this case. By using our linear regression model, we can predict the number of cases quite accurately with only errors around 86 cases instead of just predicting a label to know whether the number of cases are low, medium or high. In addition, if we are trying to predict the value beyond the range of our dataset, for instance 100k cases in a day, the model will only predict it as ‘high’, but we have no idea how high the number of cases is. Therefore, we think that regression works better in this task.')

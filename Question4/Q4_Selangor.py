@@ -81,7 +81,7 @@ def model_selangor():
         st.write(table1)
 
     with right_column:
-        st.markdown('** Linear Regressor Score **')
+        st.markdown('** Linear Regression Score **')
         table2 = go.Figure(data=[go.Table(
         columnwidth=[1, 4],
         header=dict(values=['Metrics', 'Value'],
@@ -95,6 +95,8 @@ def model_selangor():
         table2 = table2.update_layout(width=400,height=200, margin=dict(l=0,r=10,t=5,b=0))
         st.write(table2)
 
+    st.markdown('For regression, we choose CatBoostRegressor and Linear Regression to predict the daily case. After running these two regressors, we obtained the results and compared them side by side. We use mean squared error (MSE) and root mean squared errors (RMSE) as the indicator. The MSE and RMSE of linear regression are lower than the MSE and RMSE of the CatBoostRegressor at 245300.84, 495.28, 268749.27 and 518.41 respectively. Hence, linear regression is performing better in predicting the daily cases for Johor. Besides, we have also used Mean Absolute Error(MAE) as one of the evaluation metrics for Linear Regression and CatBoostRegressor which is at 395.05 and 400.23 respectively. MAE is a good way to evaluate the model as it calculates the absolute difference between actual and predicted values. A lower MAE is always better so Linear Regression performs better than CatBoostRegressor.')
+
     y_selangor_bin =pd.cut(y_selangor,3,labels=['Low','Medium','High'])
     X_selangor_train, X_selangor_test, y_selangor_train, y_selangor_test = train_test_split(X_selangor_norm, y_selangor_bin, test_size=0.3, random_state=2)
 
@@ -105,6 +107,7 @@ def model_selangor():
     class_lgbm = classification_report(y_selangor_test, y_pred_lgbm_selangor )
 
     st.markdown('## Classification')
+    st.markdown('We use LGBM and Random Forest Classifier to predict the daily cases and compare their performance. ')
     st.markdown('** LGBM Classifier **')
 
     st.write(class_lgbm)
@@ -115,6 +118,8 @@ def model_selangor():
     lgbm_display = ConfusionMatrixDisplay(confusion_matrix=conf_matrix_lgbm,display_labels = lgbm.classes_)
     lgbm_display.plot(cmap = 'Greens',xticks_rotation ='vertical',ax=ax1)
     st.pyplot(fig1)
+
+    st.markdown('The first graph above shows the confusion matrix for the LGBM Classifier. This classifier has high accuracy across all labels.')
 
     with open('Model/rf_selangor', 'rb') as file:  
         rfc = pickle.load(file)
@@ -132,6 +137,8 @@ def model_selangor():
     rfc_display.plot(cmap = 'Greens',xticks_rotation ='vertical',ax=ax2)
     st.pyplot(fig2)
 
+    st.markdown('The second graph above shows the confusion matrix for the Random Forest Classifier. This classifier also has high accuracy across the labels. This classifier has a similar accuracy with the LGBM classifier but this classifier predicts less correct labels than the LGBM classifier. ')
+
     encoder = LabelEncoder()
     y_selangor_test = encoder.fit_transform(y_selangor_test)
 
@@ -145,7 +152,7 @@ def model_selangor():
     random_probs = [0 for i in range(len(y_selangor_test))]
     p_fpr, p_tpr, _ = roc_curve(y_selangor_test, random_probs, pos_label=1)
 
-    st.markdown('## Perfomance Comparasion')
+    st.markdown('## Perfomance Comparison')
 
     fig3,ax3 = plt.subplots()
     plt.style.use('seaborn')
@@ -167,3 +174,6 @@ def model_selangor():
     plt.title('Precision-Recall Curve')
     plt.legend()
     st.pyplot(fig4)
+
+    st.markdown('The ROC curve and Precision-Recall Curve also shows that both classifiers are perfect classifiers. This happens probably because the data used for training is too little. If we use more data to train these models, we might not be able to replicate the excellent performance.')
+    st.markdown('If we were forced to choose only one type of supervised learning technique, we will prefer a regression model in this case. Through our experiment above, the linear regression model can predict the number of cases quite accurately with only errors of around 495 cases. The classification model can only predict a label of “low”, “medium” or “high”. We cannot know the exact number of cases for that particular day. For example, if we are trying to predict the value beyond the range of our dataset, for instance 100k cases in a day, the model will only predict it as ‘high’, but we have no idea how high the number of cases is. Therefore, we think that regression works better in this task.')

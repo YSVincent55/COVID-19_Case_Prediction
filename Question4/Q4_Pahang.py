@@ -146,47 +146,17 @@ def model_pahang():
     random_probs = [0 for i in range(len(y_pahang_test))]
     p_fpr, p_tpr, _ = roc_curve(y_pahang_test, random_probs, pos_label=1)
 
-    roc_lgbm = pd.DataFrame()
-    roc_lgbm['fpr'] = fpr1
-    roc_lgbm['tpr'] = tpr1
-    roc_lgbm['Type'] = 'LGBM'
-
-    roc_rf = pd.DataFrame()
-    roc_rf['fpr'] = fpr2
-    roc_rf['tpr'] = tpr2
-    roc_rf['Type'] = 'Random Forest'
-
-    roc_all = pd.concat([roc_lgbm,roc_rf])
-
-    roc_p = pd.DataFrame()
-    roc_p['fpr'] = p_fpr
-    roc_p['tpr'] = p_tpr
-
-    prc_lgbm = pd.DataFrame()
-    prc_lgbm['prec'] = prec_lgbm
-    prc_lgbm['rec'] = rec_lgbm
-    prc_lgbm['Type'] = 'LGBM'
-
-    prc_rf = pd.DataFrame()
-    prc_rf['prec'] = prec_rfc
-    prc_rf['rec'] = rec_rfc
-    prc_rf['Type'] = 'Random Forest'
-
-    prc_all = pd.concat([prc_lgbm,prc_rf])
-
     st.markdown('## Perfomance Comparasion')
 
-    chart_all = alt.Chart(roc_all).mark_line().encode(
-                                                    alt.X('fpr', title="False Positive Rate"),
-                                                    alt.Y('tpr', title="True Positive Rate"),
-                                                    alt.Color('Type', type='nominal'))
-
-    chart_p = alt.Chart(roc_p).mark_line(strokeDash=[20,5], color = 'black').encode(
-                                                                    alt.X('fpr'),
-                                                                    alt.Y('tpr'))
-
-    roc_chart =chart_all + chart_p.properties(title='ROC curve',width=800,height=600,)
-    st.altair_chart(roc_chart)
+    fig3, ax3 = plt.subplots()
+    plt.style.use('seaborn')
+    plt.plot(fpr1, tpr1, linestyle='--',color='orange', label='LGBM Classifier')
+    plt.plot(fpr2, tpr2, linestyle='--',color='green', label='Random Forest Classifier')
+    plt.plot(p_fpr, p_tpr, linestyle='--', color='black')
+    plt.title('ROC curve')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive rate')
+    st.pyplot(fig3)
 
     fig4, ax4 = plt.subplots()
     prec_lgbm, rec_lgbm, threshold_lgbm = precision_recall_curve(y_pahang_test, pred_prob1,pos_label=1)

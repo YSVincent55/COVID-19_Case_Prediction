@@ -18,9 +18,21 @@ from Question4 import Q4_Pahang as q4pahang
 from Question4 import Q4_Johor as q4johor
 from Question4 import Q4_kedah as q4kedah
 from Question4 import Q4_Selangor as q4selangor
+
 selectQuestion = st.sidebar.radio('Select a Question to View', ('Question 1','Question 2','Question 3','Question 4'))
+st.sidebar.markdown('# ')
+st.sidebar.markdown('# ')
+st.sidebar.markdown('# ')
+st.sidebar.markdown('** TDS 3301 Data Mining **')
+st.sidebar.markdown('** Group Assignment **')
+st.sidebar.markdown('Prepared by: ')
+st.sidebar.markdown('Yap Mou En - 1191301106')
+st.sidebar.markdown('Lim Ying Shen - 1191301089')
+st.sidebar.markdown('Aw Yew Lim - 1171103827')
 
 if selectQuestion == 'Question 1':
+    st.markdown('## Question 1')
+    st.markdown('### Discuss the exploratory data analysis steps you have conducted including detection of outliers and missing values?')
     selectDatasets = st.selectbox("Select Datasets", ['Cases','Tests','Deaths','Population','PKRC','Hospital','ICU'])
    
     if selectDatasets == 'Cases':
@@ -39,9 +51,13 @@ if selectQuestion == 'Question 1':
         icu.q1_icu()
 
 elif selectQuestion == 'Question 2':
+    st.markdown('## Question 2')
+    st.markdown('### What are the states that exhibit strong correlation with (i) Pahang, and (ii) Johor?')
     corr.q2_corr()
 
 elif selectQuestion == 'Question 3':
+    st.markdown('## Question 3')
+    st.markdown('### What are the strong features/indicators to daily cases for (i) Pahang, (ii) Kedah, (iii) Johor, and (iv) Selangor?')
     selectStates_2 = st.selectbox("Select States", ['Pahang','Kedah','Johor','Selangor'])
 
     if selectStates_2 == 'Pahang': 
@@ -54,6 +70,8 @@ elif selectQuestion == 'Question 3':
         q3selangor.boruta_selangor()
 
 else:
+    st.markdown('## Question 4')
+    st.markdown('### Comparing regression and classification models, what model performs well in predicting the daily cases for (i) Pahang, (ii) Kedah, (iii) Johor, and (iv) Selangor?')
     selectStates_3 = st.selectbox("Select States", ['Pahang','Kedah','Johor','Selangor'])
 
     if selectStates_3 == 'Pahang': 

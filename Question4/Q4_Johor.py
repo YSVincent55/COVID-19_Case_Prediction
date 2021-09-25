@@ -78,7 +78,7 @@ def model_johor():
                 fill=dict(color=['lightcyan']),
                 align='center',height=30))
         ])
-        table1 = table1.update_layout(width=600,height=200, margin=dict(l=0,r=10,t=5,b=0))
+        table1 = table1.update_layout(width=400,height=200, margin=dict(l=0,r=10,t=5,b=0))
         st.write(table1)
 
     with right_column:
@@ -93,7 +93,7 @@ def model_johor():
                 fill=dict(color=['lightcyan']),
                 align='center',height=30))
         ])
-        table2 = table2.update_layout(width=600,height=200, margin=dict(l=0,r=10,t=5,b=0))
+        table2 = table2.update_layout(width=400,height=200, margin=dict(l=0,r=10,t=5,b=0))
         st.write(table2)
 
     y_johor_bin =pd.cut(y_johor,3,labels=['Low','Medium','High'])

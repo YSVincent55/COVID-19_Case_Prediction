@@ -16,7 +16,6 @@ def q4_selangor():
     from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
     from sklearn.metrics import roc_curve
     from sklearn.metrics import roc_auc_score
-    from sklearn.metrics import plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve
     from sklearn.metrics import precision_recall_curve
     from lightgbm import LGBMClassifier
     from sklearn.preprocessing import LabelEncoder
@@ -145,61 +144,25 @@ def q4_selangor():
     random_probs = [0 for i in range(len(y_selangor_test))]
     p_fpr, p_tpr, _ = roc_curve(y_selangor_test, random_probs, pos_label=1)
 
-
-    roc_lgbm = pd.DataFrame()
-    roc_lgbm['fpr'] = fpr1
-    roc_lgbm['tpr'] = tpr1
-    roc_lgbm['Type'] = 'LGBM'
-
-    roc_rf = pd.DataFrame()
-    roc_rf['fpr'] = fpr2
-    roc_rf['tpr'] = tpr2
-    roc_rf['Type'] = 'Random Forest'
-
-    roc_all = pd.concat([roc_lgbm,roc_rf])
-
-    roc_p = pd.DataFrame()
-    roc_p['fpr'] = p_fpr
-    roc_p['tpr'] = p_tpr
-
-    prc_lgbm = pd.DataFrame()
-    prc_lgbm['prec'] = prec_lgbm
-    prc_lgbm['rec'] = rec_lgbm
-    prc_lgbm['Type'] = 'LGBM'
-
-    prc_rf = pd.DataFrame()
-    prc_rf['prec'] = prec_rfc
-    prc_rf['rec'] = rec_rfc
-    prc_rf['Type'] = 'Random Forest'
-
-    prc_all = pd.concat([prc_lgbm,prc_rf])
-
-    prc_p = pd.DataFrame()
-    prc_p['prec'] = np.arange(0,1.1,0.1)
-    prc_p['rec'] = 0.1
-
     st.markdown('## Perfomance Comparasion')
 
-    chart_all = alt.Chart(roc_all).mark_line().encode(
-                                                    alt.X('fpr', title="False Positive Rate"),
-                                                    alt.Y('tpr', title="True Positive Rate"),
-                                                    alt.Color('Type', type='nominal'))
+    fig3,ax3 = plt.subplots()
+    plt.style.use('seaborn')
+    plt.plot(fpr1, tpr1, linestyle='--',color='orange', label='LGBM Classifier')
+    plt.plot(fpr2, tpr2, linestyle='--',color='green', label='Random Forest Classifier')
+    plt.plot(p_fpr, p_tpr, linestyle='--', color='black')
+    plt.title('ROC curve')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive rate')
+    st.pyplot(fig3)
 
-    chart_p = alt.Chart(roc_p).mark_line(strokeDash=[20,5], color = 'black').encode(
-                                                                    alt.X('fpr'),
-                                                                    alt.Y('tpr'))
-
-    roc_chart =chart_all + chart_p.properties(title='ROC curve',width=800,height=600,)
-    st.altair_chart(roc_chart)
-
-    prc_chart_all = alt.Chart(prc_all).mark_line().encode(
-                                                    alt.X('rec', title="Recall"),
-                                                    alt.Y('prec', title="Precision"),
-                                                    alt.Color('Type', type='nominal'))
-
-    chart_p = alt.Chart(prc_p).mark_line(strokeDash=[20,5], color = 'black').encode(
-                                                                    alt.X('prec'),
-                                                                    alt.Y('rec'))
-
-    prc_chart =prc_chart_all + chart_p.properties(title='Precision-Recall Curve',width=800,height=600,)
-    st.altair_chart(prc_chart)
+    fig4,ax4 = plt.subplots()
+    plt.plot(rec_lgbm, prec_lgbm, color='orange', label='LGBM Classifier') 
+    plt.plot(rec_rfc, prec_rfc, color='green', label='Random Forest Classifier') 
+    baseline4 = len(y_selangor_test[y_selangor_test==1]) / len(y_selangor_test)
+    plt.plot([1, 0], [baseline4,baseline4], color='black', linestyle='--')
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.title('Precision-Recall Curve')
+    plt.legend()
+    st.pyplot(fig4)

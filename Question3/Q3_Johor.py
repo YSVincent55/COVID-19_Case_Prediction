@@ -39,6 +39,4 @@ def corr_johor():
     )
 
     st.altair_chart(cor_plot+text)
-    st.markdown("The strong features to daily cases for Johor are:")
-    st.markdown("\ncases_recovered, rtk-ag, pcr, total_tests, positivity_rate , deaths_new, deaths_new_dod, deaths_bid, deaths_bid_dod, pkrc_noncovid, beds_covid, beds_noncrit, admitted_covid_y, admitted_total_y, discharged_covid, discharged_total, hosp_covid, hosp_noncovid, beds_icu, beds_icu_rep, beds_icu_total, vent, vent_port, vent_covid, vent_noncovid, vent_port_used")
-    st.markdown("\nas all of these features obtained a correlation coefficients over 0.5 or -0.5.")
+    st.markdown("The correlation map above has shown the correlation between features for Johor. To extract the strong features from the map, we decide to select the absolute correlation coefficients over 0.5 or -0.5 with cases_new. Hence, we found out the strong features are cases_recovered, rtk-ag, pcr, total_tests, positivity_rate , deaths_new, deaths_new_dod, deaths_bid, deaths_bid_dod, pkrc_noncovid, beds_covid, beds_noncrit, admitted_covid_y, admitted_total_y, discharged_covid, discharged_total, hosp_covid, hosp_noncovid, beds_icu, beds_icu_rep, beds_icu_total, vent, vent_port, vent_covid, vent_noncovid, vent_port_used as all of these features obtained a correlation coefficients over 0.5 or below -0.5.")

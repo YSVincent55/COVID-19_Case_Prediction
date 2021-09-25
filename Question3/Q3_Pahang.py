@@ -39,5 +39,5 @@ def corr_pahang():
 
     st.altair_chart(cor_plot+text)
 
-    st.markdown('The strong features are cases_recovered, pcr, positivity_rate, beds_x, pkrc_admitted_covid, pkrc_admitted_total, pkrc_discharged_covid, pkrc_discharged_total, pkrc_covid,beds_y, beds_covid,beds_noncrit, beds_icu_rep, beds_icu_total, beds_icu_covid, vent, vent_port, vent_covid, vent_noncovid and vent_port_used ')
+    st.markdown('The map above shows the correlation map between variables for Pahang. To extract the strong features from the map, we decide to select the absolute correlation value higher than 0.5 with cases_new. Hence, we found out the strong features are cases_recovered, pcr, positivity_rate, beds_x, pkrc_admitted_covid, pkrc_admitted_total, pkrc_discharged_covid, pkrc_discharged_total, pkrc_covid, beds_y, beds_covid, beds_noncrit, beds_icu_rep, beds_icu_total, beds_icu_covid, vent, vent_port, vent_covid, vent_noncovid and vent_port_used. ')
 

@@ -37,4 +37,4 @@ def lasso_kedah():
     table = table.update_layout(width=600, height=1500)
     st.write(table)
 
-    st.markdown('The strong features are cases_recovered, pcr, total_tests, positivity_rate, deaths_new, deaths_bid, deaths_bid_dod, beds_x, pkrc_covid, pkrc_pui, beds_y, hosp_noncovid, beds_icu_rep, vent, vent_port, icu_covid, icu_noncovid, vent_noncovid, vent_used, vent_port_used')
+    st.markdown('For Kedah, we decided to use LASSO to find the strong features. LASSO determines the strong features by assigning a coefficient value larger than 0. The LASSO we used is cross validation 5 times with 9 different alpha values to find the most suitable model. Then, we trained the model and extracted the coefficient values of every column. After applying LASSO, we found that the strong features for Kedah are cases_recovered, pcr, total_tests, positivity_rate, deaths_new, deaths_bid, deaths_bid_dod, beds_x, pkrc_covid, pkrc_pui, beds_y, hosp_noncovid, beds_icu_rep, vent, vent_port, icu_covid, icu_noncovid, vent_noncovid, vent_used and vent_port_used')

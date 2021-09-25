@@ -32,3 +32,5 @@ def boruta_selangor():
                 height=8, aspect=1.5, palette='coolwarm')
     plt.title("Boruta Top 23 Features")
     st.pyplot(sns_boruta_plot)
+
+    st.markdown('For Selangor, a different technique for selecting the strong features has been applied which is through Boruta algorithm. A boruta score has been obtained after inserting all the inputs into this algorithm. A boruta score that is larger than 0.5 will be taken as strong features. A total of 23 strong features have been obtained which are : pcr, positivity_rate,  cases_recovered, hosp_pui, pkrc_admitted_total, vent_noncovid, rtk-ag, hosp_admitted_pui, vent_covid, icu_noncovid, hosp_noncovid, icu_covid, hosp_discharged_covid,hosp_covid, ,hosp_discharged_total, deaths_new, pkrc_covid, pkrc_admitted_covid, total_tests, pkrc_discharged_covid, hosp_admitted_total, beds_covid, and hosp_discharged_pui.')

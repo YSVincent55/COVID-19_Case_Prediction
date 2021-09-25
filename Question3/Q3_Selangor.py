@@ -29,6 +29,6 @@ def boruta_selangor():
     boruta_score = boruta_score.sort_values("Score", ascending = False)
 
     sns_boruta_plot = sns.catplot(x="Score", y="Features", data = boruta_score[0:23], kind = "bar", 
-                height=12, aspect=1.5, palette='coolwarm')
+                height=8, aspect=1.5, palette='coolwarm')
     plt.title("Boruta Top 23 Features")
     st.pyplot(sns_boruta_plot)

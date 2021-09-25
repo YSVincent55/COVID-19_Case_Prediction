@@ -1,28 +1,30 @@
-def q4_johor():
-    import streamlit as st 
-    import numpy as np
-    import pandas as pd
-    import altair as alt 
-    import matplotlib.pyplot as plt
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.model_selection import train_test_split
-    from sklearn.linear_model import LinearRegression
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.metrics import mean_squared_error as mse, mean_absolute_error, roc_curve, accuracy_score, classification_report, roc_auc_score
-    from sklearn import metrics
-    from catboost import CatBoostRegressor
-    from sklearn.metrics import confusion_matrix
-    from sklearn.metrics import ConfusionMatrixDisplay
-    from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-    from sklearn.metrics import roc_curve
-    from sklearn.metrics import roc_auc_score
-    from sklearn.metrics import precision_recall_curve
-    from lightgbm import LGBMClassifier
-    from sklearn.preprocessing import LabelEncoder
-    import warnings
-    import pickle
-    import plotly.graph_objects as go
+import streamlit as st 
+import numpy as np
+import pandas as pd
+import altair as alt 
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import mean_squared_error as mse, mean_absolute_error, roc_curve, accuracy_score, classification_report, roc_auc_score
+from sklearn import metrics
+from catboost import CatBoostRegressor
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve
+from sklearn.metrics import precision_recall_curve
+from lightgbm import LGBMClassifier
+from sklearn.preprocessing import LabelEncoder
+import warnings
+import pickle
+import plotly.graph_objects as go
 
+def model_johor():
+   
     strong_feat = ['pcr', 'positivity_rate', 'cases_recovered', 'hosp_pui',
         'pkrc_admitted_total', 'vent_noncovid', 'rtk-ag',
         'hosp_admitted_pui', 'vent_covid', 'icu_noncovid', 'hosp_noncovid',

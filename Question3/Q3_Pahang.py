@@ -1,7 +1,8 @@
-def q3_pahang():
-    import streamlit as st 
-    import pandas as pd
-    import altair as alt 
+import streamlit as st 
+import pandas as pd
+import altair as alt 
+
+def corr_pahang():
 
     final_merged = pd.read_csv('Dataset/final_merged.csv')
     q3_pahang = final_merged[final_merged['state'] == 'Pahang']

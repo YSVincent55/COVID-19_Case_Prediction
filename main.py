@@ -7,12 +7,17 @@ from Question1 import Q1_test as test
 from Question1 import Q1_death as death
 from Question1 import Q1_population as population
 from Question1 import Q1_PKRC as pkrc
+from Question1 import Q1_Hospital as hospital
+from Question1 import Q1_ICU as icu
 from Question2 import Q2_corr as corr
 from Question3 import Q3_Kedah as q3kedah
 from Question3 import Q3_Pahang as q3pahang
+from Question3 import Q3_Johor as q3johor
+from Question3 import Q3_Selangor as q3selangor
+from Question4 import Q4_Pahang as q4pahang
 from Question4 import Q4_Johor as q4johor
-from Question4 import Q4_kedah as kedah
-
+from Question4 import Q4_kedah as q4kedah
+from Question4 import Q4_Selangor as q4selangor
 selectQuestion = st.sidebar.radio('Select a Question to View', ('Question 1','Question 2','Question 3','Question 4'))
 
 if selectQuestion == 'Question 1':
@@ -28,8 +33,10 @@ if selectQuestion == 'Question 1':
         population.q1_population()
     elif selectDatasets == 'PKRC':
         pkrc.q1_pkrc()
-    #elif selectDatasets == 'Hospital':
-    #else:
+    elif selectDatasets == 'Hospital':
+        hospital.q1_hospital()
+    else:
+        icu.q1_icu()
 
 elif selectQuestion == 'Question 2':
     corr.q2_corr()
@@ -38,19 +45,23 @@ elif selectQuestion == 'Question 3':
     selectStates_2 = st.selectbox("Select States", ['Pahang','Kedah','Johor','Selangor'])
 
     if selectStates_2 == 'Pahang': 
-        q3pahang.q3_pahang()
+        q3pahang.corr_pahang()
     elif selectStates_2 == 'Kedah':
-        q3kedah.q3_kedah()
-    #elif selectStates_2 == 'Johor':
-    #else:
+        q3kedah.lasso_kedah()
+    elif selectStates_2 == 'Johor':
+        q3johor.corr_johor()
+    else:
+        q3selangor.boruta_selangor()
 
 else:
     selectStates_3 = st.selectbox("Select States", ['Pahang','Kedah','Johor','Selangor'])
 
-    #if selectStates_3 == 'Pahang': 
-    #elif selectStates_3 == 'Kedah':
-    if selectStates_3 == 'Johor':
-        q4johor.q4_johor()
+    if selectStates_3 == 'Pahang': 
+        q4pahang.model_pahang()
     elif selectStates_3 == 'Kedah':
-        kedah.q4_kedah()
-    #else:
+        q4kedah.model_kedah()
+    elif selectStates_3 == 'Johor':
+        q4johor.model_johor()   
+    else:
+        q4selangor.model_selangor()
+  

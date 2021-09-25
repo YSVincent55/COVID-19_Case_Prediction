@@ -1,13 +1,14 @@
-def q3_kedah():
-    import streamlit as st 
-    import pandas as pd
-    import numpy as np
-    import altair as alt
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.pipeline import Pipeline
-    from sklearn.model_selection import train_test_split, GridSearchCV
-    from sklearn.linear_model import Lasso
-    import plotly.graph_objects as go
+import streamlit as st 
+import pandas as pd
+import numpy as np
+import altair as alt
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.linear_model import Lasso
+import plotly.graph_objects as go
+
+def lasso_kedah():
 
     final_merged = pd.read_csv('Dataset/final_merged.csv')
     q3_kedah = final_merged[final_merged['state'] == 'Kedah']
